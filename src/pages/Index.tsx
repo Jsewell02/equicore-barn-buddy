@@ -6,6 +6,7 @@ import Navigation from "@/components/layout/Navigation";
 import PageHeader from "@/components/layout/PageHeader";
 import { MobileNav } from "@/components/layout/MobileNav";
 import { DemoControls } from "@/components/demo/DemoControls";
+import { WeatherWidget } from "@/components/ui/weather-widget";
 import StatCard from "@/components/ui/stat-card";
 import { useDemoContext } from "@/contexts/DemoContext";
 import { 
@@ -69,25 +70,8 @@ const Index = () => {
         />
 
         <div className="p-4 lg:p-8 space-y-8">
-          {/* Time & Weather Widget */}
-          <Card className="bg-gradient-primary text-primary-foreground shadow-barn">
-            <CardContent className="p-6">
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-                <div>
-                  <div className="text-2xl md:text-3xl font-bold">
-                    {format(currentTime, 'h:mm:ss a')}
-                  </div>
-                  <div className="text-primary-foreground/80 text-lg">
-                    {format(currentTime, 'EEEE, MMMM d, yyyy')}
-                  </div>
-                </div>
-                <div className="mt-4 md:mt-0 text-right">
-                  <div className="text-xl font-semibold">72°F</div>
-                  <div className="text-primary-foreground/80">Perfect barn day</div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+          {/* Enhanced Weather Widget */}
+          <WeatherWidget currentTime={currentTime} />
 
           {/* Key Stats */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
