@@ -272,7 +272,10 @@ const Index = () => {
                       variant="secondary" 
                       size="lg" 
                       className="gap-2"
-                      onClick={() => navigate('/billing')}
+                      onClick={() => {
+                        console.log('View Analytics clicked - navigating to billing');
+                        navigate('/billing');
+                      }}
                     >
                       <TrendingUp className="w-5 h-5" />
                       View Analytics
@@ -281,7 +284,10 @@ const Index = () => {
                       variant="outline" 
                       size="lg" 
                       className="gap-2 border-accent-foreground/30 text-accent-foreground hover:bg-accent-foreground/10"
-                      onClick={() => setShowAIModal(true)}
+                      onClick={() => {
+                        console.log('AI Features clicked - opening modal');
+                        setShowAIModal(true);
+                      }}
                     >
                       <Sparkles className="w-5 h-5" />
                       AI Features

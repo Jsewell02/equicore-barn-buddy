@@ -141,7 +141,10 @@ const Navigation = () => {
                 variant="sunset" 
                 size="sm" 
                 className="w-full"
-                onClick={() => navigate('/scheduler')}
+                onClick={() => {
+                  console.log('AI Assistant clicked - navigating to scheduler');
+                  navigate('/scheduler');
+                }}
               >
                 Ask AI
               </Button>
