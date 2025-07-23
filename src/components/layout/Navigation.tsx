@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Bell, Calendar, FileText, Home, Package, Users, Sparkles, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const Navigation = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navItems = [
@@ -136,7 +137,12 @@ const Navigation = () => {
               <p className="text-xs text-primary-foreground/60 mb-3">
                 Get smart insights about your barn operations
               </p>
-              <Button variant="sunset" size="sm" className="w-full">
+              <Button 
+                variant="sunset" 
+                size="sm" 
+                className="w-full"
+                onClick={() => navigate('/scheduler')}
+              >
                 Ask AI
               </Button>
             </div>
@@ -155,7 +161,12 @@ const Navigation = () => {
                 <strong>2 AI insights</strong> available • Bella needs farrier visit
               </span>
             </div>
-            <Button variant="ghost" size="sm" className="text-accent hover:text-accent-foreground">
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="text-accent hover:text-accent-foreground"
+              onClick={() => navigate('/scheduler')}
+            >
               View All
             </Button>
           </div>

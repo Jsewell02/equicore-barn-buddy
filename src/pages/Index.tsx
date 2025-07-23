@@ -146,7 +146,12 @@ const Index = () => {
                     )}
                   </div>
                 ))}
-                <Button variant="outline" className="w-full" size="sm">
+                <Button 
+                  variant="outline" 
+                  className="w-full" 
+                  size="sm"
+                  onClick={() => setShowAIModal(true)}
+                >
                   View All Insights
                   <ChevronRight className="w-4 h-4 ml-2" />
                 </Button>
@@ -177,7 +182,12 @@ const Index = () => {
                         </Badge>
                       </div>
                     ))}
-                    <Button variant="outline" className="w-full" size="sm">
+                    <Button 
+                      variant="outline" 
+                      className="w-full" 
+                      size="sm"
+                      onClick={() => navigate('/scheduler')}
+                    >
                       View Full Schedule
                       <ChevronRight className="w-4 h-4 ml-2" />
                     </Button>
@@ -186,7 +196,12 @@ const Index = () => {
                   <div className="text-center py-8 text-muted-foreground">
                     <Calendar className="w-12 h-12 mx-auto mb-3 opacity-50" />
                     <p>No events scheduled for today</p>
-                    <Button variant="barn" size="sm" className="mt-3">
+                    <Button 
+                      variant="barn" 
+                      size="sm" 
+                      className="mt-3"
+                      onClick={() => navigate('/scheduler')}
+                    >
                       Add Event
                     </Button>
                   </div>
@@ -203,7 +218,11 @@ const Index = () => {
                   <Heart className="w-5 h-5 text-primary" />
                   Horses Overview
                 </CardTitle>
-                <Button variant="outline" size="sm">
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => navigate('/horses')}
+                >
                   View All Horses
                 </Button>
               </div>
@@ -249,11 +268,21 @@ const Index = () => {
                     Experience the future of barn management with EquiCore
                   </p>
                   <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                    <Button variant="secondary" size="lg" className="gap-2">
+                    <Button 
+                      variant="secondary" 
+                      size="lg" 
+                      className="gap-2"
+                      onClick={() => navigate('/billing')}
+                    >
                       <TrendingUp className="w-5 h-5" />
                       View Analytics
                     </Button>
-                    <Button variant="outline" size="lg" className="gap-2 border-accent-foreground/30 text-accent-foreground hover:bg-accent-foreground/10">
+                    <Button 
+                      variant="outline" 
+                      size="lg" 
+                      className="gap-2 border-accent-foreground/30 text-accent-foreground hover:bg-accent-foreground/10"
+                      onClick={() => setShowAIModal(true)}
+                    >
                       <Sparkles className="w-5 h-5" />
                       AI Features
                     </Button>
