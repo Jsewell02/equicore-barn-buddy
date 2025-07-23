@@ -14,17 +14,24 @@ import {
 } from "@/components/ui/sheet";
 import { Settings, Palette, Database, Users } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useDemoContext } from "@/contexts/DemoContext";
 
 export function DemoControls() {
-  const [barnName, setBarnName] = useState("Sunset Stables");
-  const [ownerName, setOwnerName] = useState("Demo Barn");
-  const [primaryHorse, setPrimaryHorse] = useState("Bella");
+  const { demoState, updateDemoState } = useDemoContext();
+  const [barnName, setBarnName] = useState(demoState.barnName);
+  const [ownerName, setOwnerName] = useState(demoState.ownerName);
+  const [primaryHorse, setPrimaryHorse] = useState(demoState.primaryHorse);
   const { toast } = useToast();
 
   const handleUpdateDemo = () => {
+    updateDemoState({
+      barnName,
+      ownerName,
+      primaryHorse,
+    });
     toast({
       title: "Demo Updated",
-      description: `Barn customized for ${barnName} - ready for your pitch!`,
+      description: `${barnName} demo customized - ready for your pitch!`,
     });
   };
 
@@ -72,7 +79,15 @@ export function DemoControls() {
                   onClick={() => {
                     setBarnName(preset.name);
                     setPrimaryHorse(preset.horse);
-                    handleUpdateDemo();
+                    updateDemoState({
+                      barnName: preset.name,
+                      primaryHorse: preset.horse,
+                      theme: preset.theme,
+                    });
+                    toast({
+                      title: "Preset Applied",
+                      description: `${preset.name} demo ready for your pitch!`,
+                    });
                   }}
                 >
                   <div className="text-left">

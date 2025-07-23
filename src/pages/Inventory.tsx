@@ -17,10 +17,13 @@ import {
   Search,
   Filter
 } from "lucide-react";
-import { inventory } from "@/data/mockData";
+import { getDynamicMockData } from "@/data/dynamicMockData";
+import { useDemoContext } from "@/contexts/DemoContext";
 import { format } from "date-fns";
 
 const Inventory = () => {
+  const { demoState } = useDemoContext();
+  const { inventory } = getDynamicMockData(demoState);
   const [filter, setFilter] = useState('all');
   const [reorderItem, setReorderItem] = useState<any>(null);
 

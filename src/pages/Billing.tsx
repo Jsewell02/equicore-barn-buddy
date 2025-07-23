@@ -19,10 +19,13 @@ import {
   AlertTriangle,
   CheckCircle
 } from "lucide-react";
-import { invoices } from "@/data/mockData";
+import { getDynamicMockData } from "@/data/dynamicMockData";
+import { useDemoContext } from "@/contexts/DemoContext";
 import { format } from "date-fns";
 
 const Billing = () => {
+  const { demoState } = useDemoContext();
+  const { invoices } = getDynamicMockData(demoState);
   const [selectedInvoice, setSelectedInvoice] = useState(invoices[0]);
   const [showCreateModal, setShowCreateModal] = useState(false);
 

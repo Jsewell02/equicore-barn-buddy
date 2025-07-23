@@ -20,11 +20,14 @@ import {
   Eye,
   Stethoscope
 } from "lucide-react";
-import { horses } from "@/data/mockData";
+import { getDynamicMockData } from "@/data/dynamicMockData";
+import { useDemoContext } from "@/contexts/DemoContext";
 import { format } from "date-fns";
 import horsesImage from "@/assets/horses-fence.jpg";
 
 const Horses = () => {
+  const { demoState } = useDemoContext();
+  const { horses } = getDynamicMockData(demoState);
   const [selectedHorse, setSelectedHorse] = useState(horses[0]);
   const [showVetModal, setShowVetModal] = useState(false);
 

@@ -7,6 +7,7 @@ import PageHeader from "@/components/layout/PageHeader";
 import { MobileNav } from "@/components/layout/MobileNav";
 import { DemoControls } from "@/components/demo/DemoControls";
 import StatCard from "@/components/ui/stat-card";
+import { useDemoContext } from "@/contexts/DemoContext";
 import { 
   Calendar, 
   Users, 
@@ -19,17 +20,21 @@ import {
   Clock,
   ChevronRight 
 } from "lucide-react";
-import { horses, scheduleEvents, inventory, aiInsights } from "@/data/mockData";
+import { getDynamicMockData } from "@/data/dynamicMockData";
 import { format } from "date-fns";
 import horsesImage from "@/assets/horses-fence.jpg";
 
 const Index = () => {
+  const { demoState } = useDemoContext();
   const [currentTime, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
+
+  // Get dynamic data based on demo state
+  const { horses, scheduleEvents, inventory, aiInsights } = getDynamicMockData(demoState);
 
   // Calculate stats
   const totalHorses = horses.length;
@@ -47,8 +52,8 @@ const Index = () => {
       
       <div className="lg:pl-72">
         <PageHeader 
-          title="Barn Dashboard" 
-          subtitle={`Welcome back! Here's what's happening at your barn today.`}
+          title={`${demoState.barnName} Dashboard`} 
+          subtitle={`Welcome back! Here's what's happening at ${demoState.barnName} today.`}
           action={
             <div className="flex flex-col sm:flex-row gap-2">
               <Button variant="barn" className="gap-2">
