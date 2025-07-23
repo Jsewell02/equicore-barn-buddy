@@ -21,12 +21,6 @@ const Navigation = () => {
       {/* Mobile Header */}
       <div className="lg:hidden bg-gradient-primary border-b border-border/20 shadow-barn">
         <div className="flex items-center justify-between p-4">
-          <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center">
-              <Sparkles className="w-4 h-4 text-accent-foreground" />
-            </div>
-            <span className="text-xl font-bold text-primary-foreground">EquiCore</span>
-          </div>
           <Button
             variant="ghost"
             size="icon"
@@ -35,6 +29,13 @@ const Navigation = () => {
           >
             {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </Button>
+          <div className="flex items-center space-x-2">
+            <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center">
+              <Sparkles className="w-4 h-4 text-accent-foreground" />
+            </div>
+            <span className="text-xl font-bold text-primary-foreground">EquiCore</span>
+          </div>
+          <div className="w-10"></div>
         </div>
       </div>
 
