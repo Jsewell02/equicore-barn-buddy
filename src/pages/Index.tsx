@@ -24,10 +24,14 @@ import {
 import { getDynamicMockData } from "@/data/dynamicMockData";
 import { format } from "date-fns";
 import horsesImage from "@/assets/horses-fence.jpg";
+import { AIScheduleModal } from "@/components/modals/AIScheduleModal";
+import { useNavigate } from "react-router-dom";
 
 const Index = () => {
   const { demoState } = useDemoContext();
+  const navigate = useNavigate();
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [showAIModal, setShowAIModal] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
@@ -57,11 +61,19 @@ const Index = () => {
           subtitle={`Welcome back! Here's what's happening at ${demoState.barnName} today.`}
           action={
             <div className="flex flex-col sm:flex-row gap-2">
-              <Button variant="barn" className="gap-2">
+              <Button 
+                variant="barn" 
+                className="gap-2"
+                onClick={() => setShowAIModal(true)}
+              >
                 <Sparkles className="w-4 h-4" />
                 AI Insights
               </Button>
-              <Button variant="outline" className="gap-2">
+              <Button 
+                variant="outline" 
+                className="gap-2"
+                onClick={() => navigate('/scheduler')}
+              >
                 <Calendar className="w-4 h-4" />
                 Quick Schedule
               </Button>
@@ -254,6 +266,11 @@ const Index = () => {
       </div>
       
       <DemoControls />
+      
+      <AIScheduleModal 
+        isOpen={showAIModal}
+        onClose={() => setShowAIModal(false)}
+      />
     </div>
   );
 };
