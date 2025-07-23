@@ -41,7 +41,7 @@ export function DemoControls() {
         <Button 
           variant="outline" 
           size="sm" 
-          className="fixed bottom-4 right-4 z-50 bg-background/80 backdrop-blur-sm border shadow-barn"
+          className="fixed bottom-6 right-4 z-40 bg-background/90 backdrop-blur-sm border shadow-barn lg:bottom-4 lg:z-50"
         >
           <Settings className="w-4 h-4 mr-1" />
           Demo Setup
