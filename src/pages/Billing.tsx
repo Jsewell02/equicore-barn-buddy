@@ -5,6 +5,8 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Navigation from "@/components/layout/Navigation";
 import PageHeader from "@/components/layout/PageHeader";
+import { MobileNav } from "@/components/layout/MobileNav";
+import { CreateInvoiceModal } from "@/components/modals/CreateInvoiceModal";
 import { 
   Plus, 
   FileText, 
@@ -22,6 +24,7 @@ import { format } from "date-fns";
 
 const Billing = () => {
   const [selectedInvoice, setSelectedInvoice] = useState(invoices[0]);
+  const [showCreateModal, setShowCreateModal] = useState(false);
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -38,6 +41,7 @@ const Billing = () => {
 
   return (
     <div className="min-h-screen bg-gradient-meadow">
+      <MobileNav />
       <Navigation />
       
       <div className="lg:pl-72">
@@ -46,7 +50,11 @@ const Billing = () => {
           subtitle="Manage client billing and track payments"
           action={
             <div className="flex flex-col sm:flex-row gap-2">
-              <Button variant="barn" className="gap-2">
+              <Button 
+                variant="barn" 
+                className="gap-2"
+                onClick={() => setShowCreateModal(true)}
+              >
                 <Plus className="w-4 h-4" />
                 Create Invoice
               </Button>
@@ -281,6 +289,11 @@ const Billing = () => {
           </Card>
         </div>
       </div>
+      
+      <CreateInvoiceModal 
+        isOpen={showCreateModal}
+        onClose={() => setShowCreateModal(false)}
+      />
     </div>
   );
 };

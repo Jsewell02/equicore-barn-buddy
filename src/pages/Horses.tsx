@@ -5,6 +5,8 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Navigation from "@/components/layout/Navigation";
 import PageHeader from "@/components/layout/PageHeader";
+import { MobileNav } from "@/components/layout/MobileNav";
+import { AddVetVisitModal } from "@/components/modals/AddVetVisitModal";
 import { 
   Plus, 
   Search, 
@@ -15,7 +17,8 @@ import {
   AlertTriangle,
   Activity,
   TrendingUp,
-  Eye
+  Eye,
+  Stethoscope
 } from "lucide-react";
 import { horses } from "@/data/mockData";
 import { format } from "date-fns";
@@ -23,6 +26,7 @@ import horsesImage from "@/assets/horses-fence.jpg";
 
 const Horses = () => {
   const [selectedHorse, setSelectedHorse] = useState(horses[0]);
+  const [showVetModal, setShowVetModal] = useState(false);
 
   const getHealthStatusColor = (status: string) => {
     switch (status) {
@@ -36,6 +40,7 @@ const Horses = () => {
 
   return (
     <div className="min-h-screen bg-gradient-meadow">
+      <MobileNav />
       <Navigation />
       
       <div className="lg:pl-72">
@@ -164,9 +169,9 @@ const Horses = () => {
                                 <p className="text-sm text-muted-foreground mt-1">
                                   Farrier visit overdue by 2 weeks. Schedule appointment soon for optimal hoof health.
                                 </p>
-                                <Button variant="warning" size="sm" className="mt-3">
-                                  Schedule Farrier
-                                </Button>
+                <Button variant="warning" size="sm" className="mt-3">
+                  Schedule Farrier
+                </Button>
                               </div>
                             </div>
                           </CardContent>
@@ -198,6 +203,21 @@ const Horses = () => {
                             </p>
                           </div>
                         </CardContent>
+                        <div className="flex gap-2 mt-4">
+                          <Button 
+                            variant="barn" 
+                            size="sm" 
+                            className="gap-2"
+                            onClick={() => setShowVetModal(true)}
+                          >
+                            <Stethoscope className="w-4 h-4" />
+                            Add Vet Visit
+                          </Button>
+                          <Button variant="outline" size="sm">
+                            <Plus className="w-4 h-4 mr-1" />
+                            Add Entry
+                          </Button>
+                        </div>
                       </Card>
                     </TabsContent>
                     
@@ -316,6 +336,12 @@ const Horses = () => {
           </Card>
         </div>
       </div>
+      
+      <AddVetVisitModal 
+        isOpen={showVetModal}
+        onClose={() => setShowVetModal(false)}
+        horseName={selectedHorse.name}
+      />
     </div>
   );
 };

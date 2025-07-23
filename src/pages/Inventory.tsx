@@ -4,6 +4,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Navigation from "@/components/layout/Navigation";
 import PageHeader from "@/components/layout/PageHeader";
+import { MobileNav } from "@/components/layout/MobileNav";
+import { ReorderInventoryModal } from "@/components/modals/ReorderInventoryModal";
 import { 
   Plus, 
   Package, 
@@ -20,6 +22,7 @@ import { format } from "date-fns";
 
 const Inventory = () => {
   const [filter, setFilter] = useState('all');
+  const [reorderItem, setReorderItem] = useState<any>(null);
 
   const lowStockItems = inventory.filter(item => item.currentStock <= item.minStock);
   const criticalItems = inventory.filter(item => item.currentStock < item.minStock * 0.5);
@@ -54,6 +57,7 @@ const Inventory = () => {
 
   return (
     <div className="min-h-screen bg-gradient-meadow">
+      <MobileNav />
       <Navigation />
       
       <div className="lg:pl-72">
@@ -124,7 +128,13 @@ const Inventory = () => {
                     <h4 className="font-medium text-foreground">Timothy Hay Running Low</h4>
                     <p className="text-sm text-muted-foreground">15 bales remaining, 3-week supply at current usage</p>
                   </div>
-                  <Button variant="warning" size="sm">Reorder</Button>
+                  <Button 
+                    variant="warning" 
+                    size="sm"
+                    onClick={() => setReorderItem(inventory.find(item => item.name === 'Timothy Hay'))}
+                  >
+                    Reorder
+                  </Button>
                 </div>
               </div>
               <div className="p-3 bg-secondary/10 rounded-lg border border-secondary/20">
@@ -235,7 +245,12 @@ const Inventory = () => {
                     {/* Actions */}
                     <div className="flex gap-2 pt-2">
                       {stockStatus === 'critical' || stockStatus === 'low' ? (
-                        <Button variant="barn" size="sm" className="flex-1">
+                        <Button 
+                          variant="barn" 
+                          size="sm" 
+                          className="flex-1"
+                          onClick={() => setReorderItem(item)}
+                        >
                           Reorder Now
                         </Button>
                       ) : (
@@ -281,7 +296,12 @@ const Inventory = () => {
                       <div className="text-sm text-muted-foreground">
                         Cost: ${(item.minStock * 2 * item.costPerUnit).toFixed(2)}
                       </div>
-                      <Button variant="barn" size="sm" className="mt-2">
+                      <Button 
+                        variant="barn" 
+                        size="sm" 
+                        className="mt-2"
+                        onClick={() => setReorderItem(item)}
+                      >
                         Add to Order
                       </Button>
                     </div>
@@ -298,6 +318,12 @@ const Inventory = () => {
           </Card>
         </div>
       </div>
+      
+      <ReorderInventoryModal 
+        isOpen={!!reorderItem}
+        onClose={() => setReorderItem(null)}
+        item={reorderItem}
+      />
     </div>
   );
 };

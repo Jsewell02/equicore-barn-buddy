@@ -4,6 +4,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Navigation from "@/components/layout/Navigation";
 import PageHeader from "@/components/layout/PageHeader";
+import { MobileNav } from "@/components/layout/MobileNav";
+import { DemoControls } from "@/components/demo/DemoControls";
 import StatCard from "@/components/ui/stat-card";
 import { 
   Calendar, 
@@ -40,6 +42,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-meadow">
+      <MobileNav />
       <Navigation />
       
       <div className="lg:pl-72">
@@ -260,6 +263,8 @@ const Index = () => {
           </Card>
         </div>
       </div>
+      
+      <DemoControls />
     </div>
   );
 };

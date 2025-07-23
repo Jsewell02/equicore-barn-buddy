@@ -4,6 +4,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Navigation from "@/components/layout/Navigation";
 import PageHeader from "@/components/layout/PageHeader";
+import { MobileNav } from "@/components/layout/MobileNav";
+import { AIScheduleModal } from "@/components/modals/AIScheduleModal";
 import { 
   Calendar, 
   Plus, 
@@ -20,6 +22,7 @@ import { cn } from "@/lib/utils";
 
 const Scheduler = () => {
   const [currentWeek, setCurrentWeek] = useState(new Date());
+  const [showAIModal, setShowAIModal] = useState(false);
   const weekStart = startOfWeek(currentWeek);
   
   const weekDays = Array.from({ length: 7 }, (_, i) => addDays(weekStart, i));
@@ -46,6 +49,7 @@ const Scheduler = () => {
 
   return (
     <div className="min-h-screen bg-gradient-meadow">
+      <MobileNav />
       <Navigation />
       
       <div className="lg:pl-72">
@@ -54,7 +58,11 @@ const Scheduler = () => {
           subtitle="Drag and drop to organize your barn activities"
           action={
             <div className="flex flex-col sm:flex-row gap-2">
-              <Button variant="barn" className="gap-2">
+              <Button 
+                variant="barn" 
+                className="gap-2"
+                onClick={() => setShowAIModal(true)}
+              >
                 <Sparkles className="w-4 h-4" />
                 AI Auto-Schedule
               </Button>
@@ -149,7 +157,13 @@ const Scheduler = () => {
                     <h4 className="font-medium text-foreground">Optimize Lesson Times</h4>
                     <p className="text-sm text-muted-foreground">Move Sarah's lesson to 10 AM for better horse availability</p>
                   </div>
-                  <Button variant="sunset" size="sm">Apply</Button>
+                  <Button 
+                    variant="sunset" 
+                    size="sm"
+                    onClick={() => setShowAIModal(true)}
+                  >
+                    Apply
+                  </Button>
                 </div>
               </div>
               <div className="p-3 bg-secondary/10 rounded-lg border border-secondary/20">
@@ -244,6 +258,11 @@ const Scheduler = () => {
           </Card>
         </div>
       </div>
+      
+      <AIScheduleModal 
+        isOpen={showAIModal}
+        onClose={() => setShowAIModal(false)}
+      />
     </div>
   );
 };
