@@ -66,6 +66,11 @@
     --transition-barn: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-quick: all 0.2s ease-out;
     
+    /* Enhanced spacing for better readability */
+    --spacing-section: 2.5rem;
+    --spacing-card: 2rem;
+    --spacing-element: 1.5rem;
+    
     --radius: 0.75rem;
   }
 }
@@ -77,5 +82,27 @@
 
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer components {
+  /* Enhanced card styles with better spacing */
+  .enhanced-card {
+    @apply bg-gradient-card shadow-barn rounded-lg border border-border/50 p-6;
+  }
+  
+  .enhanced-card-compact {
+    @apply bg-gradient-card shadow-card rounded-lg border border-border/50 p-4;
+  }
+  
+  /* Demo coaching styles */
+  .demo-highlight {
+    @apply relative;
+  }
+  
+  .demo-highlight::after {
+    content: '';
+    @apply absolute inset-0 rounded-lg border-2 border-accent/50 pointer-events-none animate-pulse;
   }
 }
