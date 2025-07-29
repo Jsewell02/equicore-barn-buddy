@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
+console.log('WalkthroughContext loaded'); // Debug log
+
 export type WalkthroughStep = 
   | 'welcome'
   | 'horses'
@@ -122,6 +124,7 @@ export const WalkthroughProvider: React.FC<{ children: ReactNode }> = ({ childre
 };
 
 export const useWalkthrough = () => {
+  console.log('useWalkthrough called'); // Debug log
   const context = useContext(WalkthroughContext);
   if (context === undefined) {
     throw new Error('useWalkthrough must be used within a WalkthroughProvider');

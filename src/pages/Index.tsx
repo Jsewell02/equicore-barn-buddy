@@ -40,8 +40,11 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "@/hooks/use-toast";
 
 const Index = () => {
+  console.log('Index component loading'); // Debug log
   const { demoState } = useDemoContext();
+  console.log('About to call useWalkthrough'); // Debug log
   const { startWalkthrough } = useWalkthrough();
+  console.log('useWalkthrough called successfully'); // Debug log
   const navigate = useNavigate();
   const [currentTime, setCurrentTime] = useState(new Date());
   const [showAIModal, setShowAIModal] = useState(false);
