@@ -14,6 +14,8 @@ import { WhatsNewFeed } from "@/components/ui/whats-new-feed";
 import { InsightCarousel } from "@/components/ui/insight-carousel";
 import { DemoTooltip } from "@/components/ui/demo-tooltip";
 import { useDemoContext } from "@/contexts/DemoContext";
+import { useWalkthrough } from "@/contexts/WalkthroughContext";
+import { WalkthroughOverlay } from "@/components/walkthrough/WalkthroughOverlay";
 import { 
   Calendar, 
   Users, 
@@ -27,7 +29,8 @@ import {
   ChevronRight,
   Stethoscope,
   CheckCircle,
-  AlertCircle
+  AlertCircle,
+  Wand2
 } from "lucide-react";
 import { getDynamicMockData } from "@/data/dynamicMockData";
 import { format } from "date-fns";
@@ -38,6 +41,7 @@ import { toast } from "@/hooks/use-toast";
 
 const Index = () => {
   const { demoState } = useDemoContext();
+  const { startWalkthrough } = useWalkthrough();
   const navigate = useNavigate();
   const [currentTime, setCurrentTime] = useState(new Date());
   const [showAIModal, setShowAIModal] = useState(false);
@@ -333,10 +337,10 @@ const Index = () => {
                       variant="outline" 
                       size="lg" 
                       className="gap-2 border-accent-foreground/30 text-accent-foreground hover:bg-accent-foreground/20"
-                      onClick={() => setShowAIModal(true)}
+                      onClick={startWalkthrough}
                     >
-                      <Sparkles className="w-5 h-5" />
-                      AI Features
+                      <Wand2 className="w-5 h-5" />
+                      Start Demo Tour
                     </Button>
                   </div>
                 </div>
@@ -352,6 +356,7 @@ const Index = () => {
         isOpen={showAIModal}
         onClose={() => setShowAIModal(false)}
       />
+      <WalkthroughOverlay />
     </div>
   );
 };
