@@ -18,11 +18,11 @@ import {
   Filter
 } from "lucide-react";
 import { getDynamicMockData } from "@/data/dynamicMockData";
-import { useDemoContext } from "@/contexts/DemoContext";
 import { format } from "date-fns";
 
 const Inventory = () => {
-  const { demoState } = useDemoContext();
+  // Simple fallback instead of demo context
+  const demoState = { barnName: "Sunset Stables" };
   const { inventory } = getDynamicMockData(demoState);
   const [filter, setFilter] = useState('all');
   const [reorderItem, setReorderItem] = useState<any>(null);

@@ -17,12 +17,11 @@ import {
   ChevronRight
 } from "lucide-react";
 import { getDynamicMockData } from "@/data/dynamicMockData";
-import { useDemoContext } from "@/contexts/DemoContext";
 import { format, addDays, startOfWeek, addWeeks, subWeeks } from "date-fns";
 import { cn } from "@/lib/utils";
 
 const Scheduler = () => {
-  const { demoState } = useDemoContext();
+  const demoState = { barnName: "Sunset Stables" }; // Simple fallback
   const { scheduleEvents, horses } = getDynamicMockData(demoState);
   const [currentWeek, setCurrentWeek] = useState(new Date());
   const [showAIModal, setShowAIModal] = useState(false);
